@@ -18,7 +18,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator as ValidatorFacade;
+use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\View\View;
 
 class RegisterController extends Controller
@@ -102,7 +103,7 @@ class RegisterController extends Controller
         ])->get();
 
         foreach ($userFields as $field) {
-            $rules['field_'.$field->slug] = 'required';
+            $rules['field_' . $field->slug] = 'required';
         }
 
         /*
@@ -119,14 +120,14 @@ class RegisterController extends Controller
                     ]);
 
                     if ($response['success'] !== true) {
-                        Log::error('Captcha failed '.json_encode($response));
+                        Log::error('Captcha failed ' . json_encode($response));
                         $fail('Captcha verification failed, please try again.');
                     }
                 },
             ];
         }
 
-        return Validator::make($data, $rules);
+        return ValidatorFacade::make($data, $rules);
     }
 
     /**
@@ -160,7 +161,7 @@ class RegisterController extends Controller
 
         $userFields = UserField::where(['show_on_registration' => true, 'active' => true])->get();
         foreach ($userFields as $field) {
-            $field_name = 'field_'.$field->slug;
+            $field_name = 'field_' . $field->slug;
             UserFieldValue::updateOrCreate([
                 'user_field_id' => $field->id,
                 'user_id'       => $user->id,
