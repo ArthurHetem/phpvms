@@ -103,7 +103,7 @@ class RegisterController extends Controller
         ])->get();
 
         foreach ($userFields as $field) {
-            $rules['field_' . $field->slug] = 'required';
+            $rules['field_'.$field->slug] = 'required';
         }
 
         /*
@@ -120,7 +120,7 @@ class RegisterController extends Controller
                     ]);
 
                     if ($response['success'] !== true) {
-                        Log::error('Captcha failed ' . json_encode($response));
+                        Log::error('Captcha failed '.json_encode($response));
                         $fail('Captcha verification failed, please try again.');
                     }
                 },
@@ -161,7 +161,7 @@ class RegisterController extends Controller
 
         $userFields = UserField::where(['show_on_registration' => true, 'active' => true])->get();
         foreach ($userFields as $field) {
-            $field_name = 'field_' . $field->slug;
+            $field_name = 'field_'.$field->slug;
             UserFieldValue::updateOrCreate([
                 'user_field_id' => $field->id,
                 'user_id'       => $user->id,
