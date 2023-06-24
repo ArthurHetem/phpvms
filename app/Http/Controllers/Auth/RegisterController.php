@@ -13,13 +13,13 @@ use App\Services\UserService;
 use App\Support\Countries;
 use App\Support\HttpClient;
 use App\Support\Timezonelist;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
-use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\View\View;
 
 class RegisterController extends Controller
