@@ -1,6 +1,6 @@
 @section('scripts')
   <script>
-    $(document).ready(function () {
+     window.addEventListener("load", function () {
       $("button.save_flight").click(async function (e) {
         e.preventDefault();
 
@@ -11,13 +11,13 @@
         if (!btn.hasClass(class_name)) {
           await phpvms.bids.addBid(flight_id);
 
-          console.log('successfully saved flight');
+          //console.log('successfully saved flight');
           btn.addClass(class_name);
           alert('@lang("flights.bidadded")');
         } else {
           await phpvms.bids.removeBid(flight_id);
 
-          console.log('successfully removed flight');
+          //console.log('successfully removed flight');
           btn.removeClass(class_name);
           alert('@lang("flights.bidremoved")');
         }

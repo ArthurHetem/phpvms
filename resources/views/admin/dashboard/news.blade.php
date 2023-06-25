@@ -58,7 +58,7 @@
 @section('scripts')
   @parent
   <script src="{{ public_asset('assets/vendor/ckeditor4/ckeditor.js') }}"></script>
-  <script>
+  <script type="module">
     $(document).ready(function () { CKEDITOR.replace('news_editor'); });
   </script>
 @endsection

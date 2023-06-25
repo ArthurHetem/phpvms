@@ -22,6 +22,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use \App\Http\Middleware\HandleInertiaRequests;
 
 class Kernel extends HttpKernel
 {
@@ -48,6 +49,7 @@ class Kernel extends HttpKernel
             SubstituteBindings::class,
             SetActiveTheme::class,
             SetActiveLanguage::class,
+            HandleInertiaRequests::class,
         ],
     ];
 

@@ -9,4 +9,4 @@
  * Admin stuff needed
  */
 
-import './../bootstrap';
+import '../entrypoint';

@@ -5,10 +5,9 @@
  * Edits here don't take place until you compile these assets and then upload them.
  */
 
+import leaflet from 'leaflet';
 import draw_base_map from './base_map';
 import { addWMSLayer } from './helpers';
-
-const leaflet = require('leaflet');
 
 /**
  * Render a map with the airspace, etc around a given set of coords

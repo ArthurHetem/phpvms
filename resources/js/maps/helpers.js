@@ -5,7 +5,7 @@
  * Edits here don't take place until you compile these assets and then upload them.
  */
 
-const leaflet = require('leaflet');
+import leaflet from 'leaflet';
 
 /**
  * Add a WMS layer to a map. opts must be:

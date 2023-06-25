@@ -52,7 +52,7 @@
 @endsection
 @section('scripts')
   @parent
-  <script>
+  <script type="module">
     $(document).ready(function () {
       $(document).on('submit', 'form.pjax_news_form', function (event) {
         event.preventDefault();

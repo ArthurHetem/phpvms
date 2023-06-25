@@ -9,11 +9,18 @@
  * Bootstrap any Javascript libraries required
  */
 
+import 'cookieconsent';
+import select2 from 'select2';
+
+import axios from 'axios';
 import Storage from './storage';
 import config from './config';
 import request from './request';
 
-import axios from 'axios';
+import './common';
+
+select2();
+
 window.axios = axios;
 
 /**
@@ -24,5 +31,3 @@ window.phpvms = {
   request,
   Storage,
 };
-
-import './common';

@@ -5,13 +5,12 @@
  * Edits here don't take place until you compile these assets and then upload them.
  */
 
+import leaflet from 'leaflet';
 import draw_base_map from './base_map';
 import { addWMSLayer } from './helpers';
 import request from '../request';
 
 import { ACTUAL_ROUTE_COLOR, CIRCLE_COLOR, PLAN_ROUTE_COLOR } from './config';
-
-const leaflet = require('leaflet');
 
 /**
  * Show some popup text when a feature is clicked on
@@ -26,7 +25,6 @@ export const onFeaturePointClick = (feature, layer) => {
 
   layer.bindPopup(popup_html);
 };
-
 
 /**
  *

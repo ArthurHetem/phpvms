@@ -5,9 +5,8 @@
  * Edits here don't take place until you compile these assets and then upload them.
  */
 
+import axios from 'axios';
 import config from './config';
-
-const axios = require('axios');
 
 /**
  * Run an API request, with some common options
@@ -31,7 +30,7 @@ export default async (_opts) => {
     },
   }, _opts);
 
-  console.log(opts);
+  // console.log(opts);
 
   return axios.request(opts);
 };

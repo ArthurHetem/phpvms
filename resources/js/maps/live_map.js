@@ -5,16 +5,21 @@
  * Edits here don't take place until you compile these assets and then upload them.
  */
 
+import { LatLng } from 'leaflet/dist/leaflet-src.esm';
+import leaflet from 'leaflet';
+import rivets from 'rivets';
+import jQuery from 'jquery';
+
 import draw_base_map from './base_map';
 
 import { ACTUAL_ROUTE_COLOR } from './config';
 
 import request from '../request';
-import {LatLng} from "leaflet/dist/leaflet-src.esm";
+
+window.$ = jQuery;
+window.jquery = jQuery;
 
 // const geolib = require('geolib');
-const leaflet = require('leaflet');
-const rivets = require('rivets');
 
 /**
  * Render the live map
@@ -74,7 +79,7 @@ export default (_opts) => {
       map.removeLayer(layerSelFlight);
     }
 
-    layerSelFlight = new L.Geodesic([], {
+    layerSelFlight = new leaflet.Geodesic([], {
       weight: 5,
       opacity: 0.9,
       color: opts.flown_route_color,

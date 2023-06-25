@@ -1,5 +1,5 @@
 @section('scripts')
-  <script>
+  <script type="module">
 
     const setEditable = () => {
       const api_key = $('meta[name="api-key"]').attr('content');

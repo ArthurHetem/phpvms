@@ -6,7 +6,7 @@
  * Available providers: https://leaflet-extras.github.io/leaflet-providers/preview/
  */
 
-const leaflet = require('leaflet');
+import leaflet from 'leaflet';
 import 'leaflet-providers';
 
 export default (_opts) => {

@@ -4,7 +4,7 @@
  *
  * Edits here don't take place until you compile these assets and then upload them.
  */
-
+import L from 'leaflet';
 
 import render_airspace_map from './airspace_map';
 import render_live_map from './live_map';
@@ -14,7 +14,6 @@ import render_base_map from './base_map';
 import 'leaflet.geodesic';
 import 'leaflet-rotatedmarker';
 
-import L from 'leaflet';
 window.L = L;
 
 export {

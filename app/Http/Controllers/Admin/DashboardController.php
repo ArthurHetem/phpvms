@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Laracasts\Flash\Flash;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends Controller
 {
@@ -49,7 +51,7 @@ class DashboardController extends Controller
         try {
             if ($this->kvpRepo->get('new_version_available', false) === true) {
                 $latest_version = $this->kvpRepo->get('latest_version_tag');
-                Flash::warning('New version '.$latest_version.' is available!');
+                Flash::warning('New version ' . $latest_version . ' is available!');
             }
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -67,11 +69,11 @@ class DashboardController extends Controller
      *
      * @return View
      */
-    public function index(Request $request): View
+    public function index(Request $request): Response
     {
         $this->checkNewVersion();
 
-        return view('admin.dashboard.index', [
+        return Inertia::render('Dashboard', [
             'news'                => $this->newsRepo->getLatest(),
             'pending_pireps'      => $this->pirepRepo->getPendingCount(),
             'pending_users'       => $this->userRepo->getPendingCount(),
@@ -84,9 +86,9 @@ class DashboardController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      *
-     * @return View
+     * @return void
      */
-    public function news(Request $request): View
+    public function news(Request $request): void
     {
         if ($request->isMethod('post')) {
             $attrs = $request->post();
@@ -98,8 +100,8 @@ class DashboardController extends Controller
             $this->newsSvc->deleteNews($id);
         }
 
-        return view('admin.dashboard.news', [
+        /* return view('admin.dashboard.news', [
             'news' => $this->newsRepo->getLatest(),
-        ]);
+        ]);*/
     }
 }
