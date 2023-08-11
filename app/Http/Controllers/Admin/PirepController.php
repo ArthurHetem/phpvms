@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Laracasts\Flash\Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class PirepController extends Controller
 {
@@ -76,7 +78,7 @@ class PirepController extends Controller
         foreach ($subfleets as $subfleet) {
             $tmp = [];
             foreach ($subfleet->aircraft as $ac) {
-                $tmp[$ac->id] = $ac['name'].' - '.$ac['registration'];
+                $tmp[$ac->id] = $ac['name'] . ' - ' . $ac['registration'];
             }
 
             $aircraft[$subfleet->type] = $tmp;
@@ -124,7 +126,7 @@ class PirepController extends Controller
         $fields = ['count', 'price'];
         foreach ($pirep->fares as $fare) {
             foreach ($fields as $f) {
-                $field_name = 'fare_'.$fare->id.'_'.$f;
+                $field_name = 'fare_' . $fare->id . '_' . $f;
                 if ($request->filled($field_name)) {
                     $val = $request->input($field_name);
                     $fare->{$f} = $val;
@@ -162,23 +164,25 @@ class PirepController extends Controller
      *
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      *
-     * @return View
+     * @return Response
      */
-    public function index(Request $request): View
+    public function index(Request $request): Response
     {
+        // TODO: Need to pass name of the pirep sender.
         $criterea = new RequestCriteria($request);
         $this->pirepRepo->pushCriteria($criterea);
 
         $pireps = $this->pirepRepo
-            ->with(['airline', 'aircraft', 'dpt_airport', 'arr_airport'])
+            ->with(['airline', 'aircraft', 'dpt_airport', 'arr_airport', 'user'])
             ->whereNotInOrder('state', [
                 PirepState::CANCELLED,
                 PirepState::DRAFT,
                 PirepState::IN_PROGRESS,
             ], 'created_at', 'desc')
-            ->paginate();
+            ->paginate(25);
 
-        return view('admin.pireps.index', [
+
+        return Inertia::render('Pireps/Index', [
             'pireps' => $pireps,
         ]);
     }
@@ -288,13 +292,13 @@ class PirepController extends Controller
 
         // set the custom fields
         foreach ($pirep->fields as $field) {
-            $field_name = 'field_'.$field->slug;
+            $field_name = 'field_' . $field->slug;
             $pirep->{$field_name} = $field->value;
         }
 
         // set the fares
         foreach ($pirep->fares as $fare) {
-            $field_name = 'fare_'.$fare->fare_id;
+            $field_name = 'fare_' . $fare->fare_id;
             $pirep->{$field_name} = $fare->count;
         }
 
@@ -382,7 +386,7 @@ class PirepController extends Controller
      *
      * @return View
      */
-    public function status(Request $request): View
+    public function status(Request $request): RedirectResponse
     {
         Log::info('PIREP state update call', [$request->toArray()]);
 
@@ -394,7 +398,8 @@ class PirepController extends Controller
 
         $pirep->refresh();
 
-        return view('admin.pireps.actions', ['pirep' => $pirep, 'on_edit_page' => false]);
+        //return view('admin.pireps.actions', ['pirep' => $pirep, 'on_edit_page' => false]);
+        return to_route('admin.pireps.index')->withSuccess('PIREP status updated');
     }
 
     /**

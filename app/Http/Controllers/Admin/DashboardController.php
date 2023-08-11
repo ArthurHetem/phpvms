@@ -74,7 +74,19 @@ class DashboardController extends Controller
         $this->checkNewVersion();
 
         return Inertia::render('Dashboard', [
-            'news'                => $this->newsRepo->getLatest(),
+            'news'                => $this->newsRepo->getLatest()->map(function ($news) {
+                return [
+                    'id'         => $news->id,
+                    'title'      => $news->title,
+                    'body'       => $news->body,
+                    'created_at' => show_datetime($news->created_at),
+                    'user'       => [
+                        'id'    => $news->user->id,
+                        'name'  => $news->user->name,
+                        'email' => $news->user->email,
+                    ],
+                ];
+            }),
             'pending_pireps'      => $this->pirepRepo->getPendingCount(),
             'pending_users'       => $this->userRepo->getPendingCount(),
             'cron_problem_exists' => $this->cronSvc->cronProblemExists(),

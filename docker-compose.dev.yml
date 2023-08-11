@@ -11,23 +11,23 @@ services:
       context: .
     environment:
       DB_HOST: mysql
-      REDIS_HOST: redis
+      #REDIS_HOST: redis
     volumes:
       - ./:/var/www
-#      - ./bootstrap:/var/www/bootstrap
-#      - ./config:/var/www/config
-#      - ./modules:/var/www/modules
-#      - ./public:/var/www/public
-#      - ./resources:/var/www/resources
-#      - ./storage:/var/www/storage
-#      - ./tests:/var/www/tests
-#      - ./resources/docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
-#      - ./composer.json:/var/www/composer.json
-#      - ./composer-lock.json:/var/www/composer-lock.json
-#      - ./env.php:/var/www/env.php
+    #      - ./bootstrap:/var/www/bootstrap
+    #      - ./config:/var/www/config
+    #      - ./modules:/var/www/modules
+    #      - ./public:/var/www/public
+    #      - ./resources:/var/www/resources
+    #      - ./storage:/var/www/storage
+    #      - ./tests:/var/www/tests
+    #      - ./resources/docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    #      - ./composer.json:/var/www/composer.json
+    #      - ./composer-lock.json:/var/www/composer-lock.json
+    #      - ./env.php:/var/www/env.php
     depends_on:
       - mysql
-      - redis
+      #- redis
 
   nginx:
     image: nginx
@@ -54,3 +54,13 @@ services:
       - ./resources/docker/mysql:/etc/mysql/conf.d
     ports:
       - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - mysql
+    ports:
+      - 8000:80
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=300M

@@ -33,7 +33,7 @@
 
 
 import { createApp, h } from 'vue'
-import { createInertiaApp, Link } from '@inertiajs/vue3'
+import { createInertiaApp, Link, Head } from '@inertiajs/vue3'
 
 import '../../css/app.css'
 
@@ -52,6 +52,7 @@ createInertiaApp({
       .use(plugin)
       .component('PageHeader', PageHeader)
       .component('Link', Link)
+      .component('Head', Head)
       .mount(el)
   },
 
