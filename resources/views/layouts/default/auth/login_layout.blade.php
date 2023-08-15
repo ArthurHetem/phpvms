@@ -7,13 +7,20 @@
   <link rel="icon" type="image/png" href="/assets/frontend/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <title>@yield('title') - {{ config('app.name') }}</title>
+
+    {{-- Start of required lines block. DON'T REMOVE THESE LINES! They're required or might break things --}}
+    <meta name="base-url" content="{!! url('') !!}">
+    <meta name="api-key" content="{!! Auth::check() ? Auth::user()->api_key: '' !!}">
+    <meta name="csrf-token" content="{!! csrf_token() !!}">
+    {{-- End the required lines block --}}
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport'/>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
-  <link href="{{ public_asset('/assets/frontend/css/bootstrap.min.css') }}" rel="stylesheet"/>
+  {{-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/> --}}
+  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/> --}}
+  {{-- <link href="{{ public_asset('/assets/frontend/css/bootstrap.min.css') }}" rel="stylesheet"/>
   <link href="{{ public_mix('/assets/frontend/css/now-ui-kit.css') }}" rel="stylesheet"/>
-  <link href="{{ public_asset('/assets/frontend/css/styles.css') }}" rel="stylesheet"/>
+  <link href="{{ public_asset('/assets/frontend/css/styles.css') }}" rel="stylesheet"/> --}}
+  @vite(['resources/sass/app.scss', 'resources/sass/now-ui/now-ui-kit.scss', 'resources/sass/frontend/styles.scss'])
   @yield('css')
 </head>
 
@@ -42,7 +49,7 @@
 </div>
 </body>
 
-<script src="{{ public_asset('/assets/global/js/jquery.js') }}" type="text/javascript"></script>
+@vite(['resources/js/entrypoint.js', 'resources/js/frontend/app.js'])
 
 @yield('scripts')
 
