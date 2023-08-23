@@ -7,8 +7,15 @@ export default defineConfig({
   plugins: [
     laravel({
       input: [
+        "resources/sass/app.scss",
         "resources/sass/admin/paper-dashboard.scss",
+        "resources/sass/frontend/styles.scss",
         "resources/sass/now-ui/now-ui-kit.scss",
+        "resources/sass/fonts/glyphicons-halflings-regular.woff2",
+        "resources/sass/fonts/Pe-icon-7-stroke.eot",
+        "resources/sass/fonts/Pe-icon-7-stroke.svg",
+        "resources/sass/fonts/Pe-icon-7-stroke.ttf",
+        "resources/sass/fonts/Pe-icon-7-stroke.woff",
         "resources/js/admin/app.js",
         "resources/js/admin/airport_lookup.js",
         "resources/js/admin/calculate_distance.js",
@@ -20,11 +27,6 @@ export default defineConfig({
         "resources/js/frontend/app.js",
         "resources/js/frontend/bids.js",
         "resources/js/installer/app.js",
-        "resources/sass/fonts/glyphicons-halflings-regular.woff2",
-        "resources/sass/fonts/Pe-icon-7-stroke.eot",
-        "resources/sass/fonts/Pe-icon-7-stroke.svg",
-        "resources/sass/fonts/Pe-icon-7-stroke.ttf",
-        "resources/sass/fonts/Pe-icon-7-stroke.woff",
         "public/assets/global/js/jquery.js",
         "public/assets/global/js/simbrief.apiv1.js",
       ],
