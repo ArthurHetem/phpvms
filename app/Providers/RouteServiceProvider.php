@@ -110,7 +110,7 @@ class RouteServiceProvider extends ServiceProvider
                 'namespace'  => 'Frontend',
                 'prefix'     => '',
                 'as'         => 'frontend.',
-                'middleware' => ['auth'],
+                'middleware' => (config('phpvms.registration.email_verification', false) ? ['auth', 'verified'] : ['auth']),
             ], function () {
                 Route::resource('dashboard', 'DashboardController');
 
@@ -574,6 +574,7 @@ class RouteServiceProvider extends ServiceProvider
                 Route::get('flights/{id}', 'FlightController@get');
                 Route::get('flights/{id}/briefing', 'FlightController@briefing')->name('flights.briefing');
                 Route::get('flights/{id}/route', 'FlightController@route');
+                Route::get('flights/{id}/aircraft', 'FlightController@aircraft');
 
                 Route::get('pireps', 'UserController@pireps');
                 Route::put('pireps/{pirep_id}', 'PirepController@update');
