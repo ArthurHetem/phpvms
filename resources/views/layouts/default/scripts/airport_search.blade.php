@@ -1,5 +1,5 @@
 <script>
-$(document).ready(function () {
+ window.addEventListener("load", function () {
   $("select.airport_search").select2({
     ajax: {
       url: '{{ Config::get("app.url") }}/api/airports/search',

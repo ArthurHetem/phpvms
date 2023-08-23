@@ -37,4 +37,4 @@ window.phpvms.map = {
 window.bootstrap = bootstrap;
 window.moment = moment;
 window.popper = popper;
-window.jQuery = jQuery;
+window.$ = jQuery;

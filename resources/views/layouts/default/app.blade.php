@@ -96,19 +96,15 @@ with the EU Cookie Law https://privacypolicies.com/blog/eu-cookie-law
       },
       position: "top",
     })
-
-    if (document.getElementsByClassName(".select2").length > 0){
-      document.getElementsByClassName(".select2")[0].select2({width: 'resolve'})
-    }
   });
 </script>
 {{-- End the required tags block --}}
 
-{{-- <script>
-  $(document).ready(function () {
+<script>
+   window.addEventListener("load", function () {
     $(".select2").select2({width: 'resolve'});
   });
-</script> --}}
+</script>
 
 {{--
 Google Analytics tracking code. Only active if an ID has been entered
