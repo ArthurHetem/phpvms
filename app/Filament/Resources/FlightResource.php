@@ -36,7 +36,7 @@ class FlightResource extends Resource
     public static function form(Form $form): Form
     {
         $airportRepo = app(AirportRepository::class);
-        $airports = $airportRepo->all()->mapWithKeys(fn ($item) => [$item->id => $item->icao . ' - ' . $item->name]);
+        $airports = $airportRepo->all()->mapWithKeys(fn ($item) => [$item->id => $item->icao.' - '.$item->name]);
 
         return $form
             ->schema([
