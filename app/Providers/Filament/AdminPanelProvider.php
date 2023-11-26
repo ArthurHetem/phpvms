@@ -19,6 +19,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Facades\FilamentView;
+use Illuminate\Support\Facades\Blade;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -61,12 +63,18 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()->label('Modules'),
             ])
             ->navigationItems([
-                NavigationItem::make()->label('Go back to '.config('app.name'))->icon('heroicon-o-arrow-uturn-left')->url('/'),
+                NavigationItem::make()->label('Go back to ' . config('app.name'))->icon('heroicon-o-arrow-uturn-left')->url('/'),
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
             ])
             ->brandName('phpVMS')
             ->spa();
+    }
+
+    public function register(): void
+    {
+        parent::register();
+        FilamentView::registerRenderHook('panels::body.end', fn (): string => Blade::render("@vite('resources/js/entrypoint.js')"));
     }
 }
