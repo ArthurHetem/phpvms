@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
                         : null,
                 ];
             },
-            'toasts' => []
+            'toasts' => [],
         ]);
     }
 }

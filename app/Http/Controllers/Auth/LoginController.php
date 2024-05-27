@@ -96,7 +96,7 @@ class LoginController extends Controller
                 try {
                     $user = $this->userSvc->findUserByPilotId($value);
                 } catch (PilotIdNotFound $ex) {
-                    Log::warning('Error logging in, pilot_id not found, id=' . $value);
+                    Log::warning('Error logging in, pilot_id not found, id='.$value);
                     $fail('Pilot not found');
                     return;
                 }
@@ -129,7 +129,7 @@ class LoginController extends Controller
         }
 
         if ($user->state !== UserState::ACTIVE && $user->state !== UserState::ON_LEAVE) {
-            Log::info('Trying to login ' . $user->ident . ', state ' . UserState::label($user->state));
+            Log::info('Trying to login '.$user->ident.', state '.UserState::label($user->state));
 
             // Log them out
             $this->guard()->logout();
