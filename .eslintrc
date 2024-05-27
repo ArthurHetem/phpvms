@@ -1,28 +1,85 @@
 {
-  "extends": "airbnb",
   "env": {
-    "es6": true,
-    "browser": true
+      "browser": true,
+      "es6": true,
+      "node": true
   },
-  "parserOptions": {
-    "ecmaVersion": 8
-  },
+  "extends": [
+      "standard",
+      "plugin:vue/vue3-recommended"
+  ],
   "rules": {
-    "camelcase": 0,
-    "no-console": 0,
-    "func-names": 0,
-    "prefer-object-spread": 0,
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true
-      }
-    ]
-  }
+      "vue/require-default-prop": "off",
+      "vue/multi-word-component-names": "off"
+  },
+  "globals": {
+      // General
+      "nextTick": true,
+      "defineComponent": true,
+      "defineAsyncComponent": true,
+      "defineCustomElement": true,
+      // Vue Reactivity: Core
+      "ref": true,
+      "computed": true,
+      "reactive": true,
+      "readonly": true,
+      "watchEffect": true,
+      "watchPostEffect": true,
+      "watchSyncEffect": true,
+      "watch": true,
+      // Vue Reactivity: Utilities
+      "isRef": true,
+      "unref": true,
+      "toRef": true,
+      "toRefs": true,
+      "isProxy": true,
+      "isReactive": true,
+      "isReadonly": true,
+      // Vue Reactivity: Advanced
+      "shallowRef": true,
+      "triggerRef": true,
+      "customRef": true,
+      "shallowReactive": true,
+      "shallowReadonly": true,
+      "toRaw": true,
+      "markRaw": true,
+      "effectScope": true,
+      "getCurrentScope": true,
+      "onScopeDispose": true,
+      // Vue Lifecycle Hooks
+      "onMounted": true,
+      "onUpdated": true,
+      "onUnmounted": true,
+      "onBeforeMount": true,
+      "onBeforeUpdate": true,
+      "onBeforeUnmount": true,
+      "onErrorCaptured": true,
+      "onRenderTracked": true,
+      "onRenderTriggered": true,
+      "onActivated": true,
+      "onDeactivated": true,
+      "onServerPrefetch": true,
+      // Vue Dependency Injection
+      "provide": true,
+      "inject": true,
+      // Vue <script setup>
+      "defineProps": true,
+      "defineEmits": true,
+      "useAttrs": true,
+      "useSlots": true,
+      "defineExpose": true,
+      // Inertia
+      "router": true,
+      "useForm": true,
+      "usePage": true,
+      // Pinia
+      "defineStore": true,
+      "storeToRefs": true,
+      // Quasar,
+      "useQuasar": true
+  },
+  "ignorePatterns": [
+      "node_modules/**/*",
+      "vendor/**/*"
+  ]
 }

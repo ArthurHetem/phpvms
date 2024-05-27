@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      "baseUrl": ".",
+      "jsx": "preserve",
+      "paths": {
+          "@/*": [
+              "resources/views/layouts/vite/*"
+          ]
+      }
+  },
+  "exclude": [
+      "node_modules",
+      "public"
+  ]
+}

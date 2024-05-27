@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
+use Inertia\Inertia;
 
 class LoginController extends Controller
 {
@@ -22,7 +23,7 @@ class LoginController extends Controller
     /**
      * Where to redirect after logging in
      */
-    protected mixed $redirectTo = '/dashboard';
+    protected mixed $redirectTo = '/crew/dashboard';
 
     /** @var string */
     private string $loginFieldValue;
@@ -37,6 +38,16 @@ class LoginController extends Controller
     ) {
         $this->redirectTo = config('phpvms.login_redirect');
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Inertia\Response
+     */
+    public function showLoginForm()
+    {
+        return Inertia::render('Auth/Login');
     }
 
     /**
@@ -85,7 +96,7 @@ class LoginController extends Controller
                 try {
                     $user = $this->userSvc->findUserByPilotId($value);
                 } catch (PilotIdNotFound $ex) {
-                    Log::warning('Error logging in, pilot_id not found, id='.$value);
+                    Log::warning('Error logging in, pilot_id not found, id=' . $value);
                     $fail('Pilot not found');
                     return;
                 }
@@ -118,7 +129,7 @@ class LoginController extends Controller
         }
 
         if ($user->state !== UserState::ACTIVE && $user->state !== UserState::ON_LEAVE) {
-            Log::info('Trying to login '.$user->ident.', state '.UserState::label($user->state));
+            Log::info('Trying to login ' . $user->ident . ', state ' . UserState::label($user->state));
 
             // Log them out
             $this->guard()->logout();

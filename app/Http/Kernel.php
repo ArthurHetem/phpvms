@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\ApiAuth;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\InstalledCheck;
 use App\Http\Middleware\JsonResponse;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -53,6 +54,7 @@ class Kernel extends HttpKernel
             SubstituteBindings::class,
             SetActiveTheme::class,
             SetActiveLanguage::class,
+            HandleInertiaRequests::class,
         ],
     ];
 
